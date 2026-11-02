@@ -1,0 +1,697 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PassportPage from '../components/PassportPage.astro';
+import { site, destinations, steps, documents, faqs } from '../data/site';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+  `Assalam o Alaikum, I'd like to ask about a visit visa.`
+)}`;
+const year = new Date().getFullYear();
+---
+
+<Layout
+  title={`${site.name} | Visit Visa Consultants in Islamabad`}
+  description="RM Sky Consultancy helps you apply for UK, Schengen, USA, Canada and Australia visit visas from Islamabad, with document checks, applications and interview preparation."
+>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">
+        <img src="/favicon.svg" alt="" width="36" height="36" />
+        <span>{site.name}</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="#destinations">Destinations</a>
+        <a href="#process">How it works</a>
+        <a href="#documents">Documents</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary header-cta">Book a consultation</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="hero-place">Visit visa consultants in {site.city}</p>
+          <h1>Your next stamp, prepared properly.</h1>
+          <p class="hero-lede">
+            We help families, professionals and travellers apply for visit visas to the UK, Europe,
+            North America and Australia, from the first assessment to the day you collect your passport.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Book a free assessment</a>
+            <a href={waLink} class="btn btn-ghost" target="_blank" rel="noopener">Message us on WhatsApp</a>
+          </div>
+        </div>
+        <PassportPage />
+      </div>
+    </section>
+
+    <!-- Destinations -->
+    <section id="destinations" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Where we can help you go</h2>
+          <p>
+            Visit visas for the destinations our clients ask about most. Travelling somewhere else?
+            Ask us, we handle many more.
+          </p>
+        </div>
+        <ul class="dest-list">
+          {
+            destinations.map((d) => (
+              <li>
+                <h3>{d.country}</h3>
+                <span class="dest-visa">{d.visa}</span>
+                <p>{d.use}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="section section-green">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>How your application works</h2>
+          <p>Four steps, with one consultant looking after your file from start to finish.</p>
+        </div>
+        <ol class="steps">
+          {
+            steps.map((s, i) => (
+              <li>
+                <span class="step-num">{i + 1}</span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- Documents + why us -->
+    <section id="documents" class="section">
+      <div class="wrap docs-grid">
+        <div>
+          <h2>What you’ll usually need</h2>
+          <p class="docs-intro">
+            Every embassy asks for something slightly different. This is the core of most visit visa
+            applications from Pakistan. We’ll give you the exact list for your case.
+          </p>
+          <ul class="checklist">
+            {documents.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+        <aside class="why">
+          <h2>Why people choose RM Sky</h2>
+          <dl>
+            <div>
+              <dt>Honest advice first</dt>
+              <dd>If your case isn’t ready, we tell you what to strengthen before you spend money on embassy fees.</dd>
+            </div>
+            <div>
+              <dt>Every document checked</dt>
+              <dd>Small inconsistencies cause refusals. We review your whole file line by line before submission.</dd>
+            </div>
+            <div>
+              <dt>Here in Islamabad</dt>
+              <dd>Meet your consultant in person, or keep in touch on WhatsApp while you get on with your day.</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section section-tint">
+      <div class="wrap faq-grid">
+        <div class="section-head">
+          <h2>Questions we hear every day</h2>
+          <p>Can’t find yours? Send us a message and we’ll answer it directly.</p>
+        </div>
+        <div class="faq-list">
+          {
+            faqs.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+      <div class="wrap contact-grid">
+        <div class="contact-info">
+          <h2>Book your free assessment</h2>
+          <p>
+            Tell us a little about your trip and we’ll get back to you, usually the same working day.
+          </p>
+          <dl class="contact-details">
+            <div><dt>Phone</dt><dd><a href={`tel:+${site.whatsapp}`}>{site.phoneDisplay}</a></dd></div>
+            <div><dt>WhatsApp</dt><dd><a href={waLink} target="_blank" rel="noopener">Chat with us</a></dd></div>
+            <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+            <div><dt>Office</dt><dd>{site.address}</dd></div>
+            <div><dt>Hours</dt><dd>{site.hours}</dd></div>
+          </dl>
+        </div>
+
+        <form class="contact-form" id="enquiry" data-wa={site.whatsapp}>
+          <label>
+            <span>Full name</span>
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            <span>Phone or WhatsApp number</span>
+            <input name="phone" type="tel" autocomplete="tel" required />
+          </label>
+          <label>
+            <span>Where do you want to travel?</span>
+            <select name="destination" required>
+              <option value="" disabled selected>Choose a destination</option>
+              {destinations.map((d) => <option>{d.country}</option>)}
+              <option>Somewhere else</option>
+            </select>
+          </label>
+          <label>
+            <span>Anything we should know? <em>(optional)</em></span>
+            <textarea name="message" rows="4" placeholder="Purpose of travel, dates, previous refusals…"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary">Send enquiry on WhatsApp</button>
+          <p class="form-note">This opens WhatsApp with your details filled in, ready to send.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>{site.name}</strong>, visit visa consultants in {site.city}.</p>
+      <p class="disclaimer">
+        We are an independent consultancy and are not affiliated with any embassy or government.
+        Visa decisions are made solely by the relevant authorities.
+      </p>
+      <p class="copy">© {year} {site.name}</p>
+    </div>
+  </footer>
+
+  <a href={waLink} class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.9 9.9 5.2 16 5.2s11 4.7 11 10.6-4.9 10.6-11 10.6zm6-7.9c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.6-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 2.9 1.1 3.4.9 4.1.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
+  </a>
+</Layout>
+
+<script>
+  const form = document.getElementById('enquiry') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const lines = [
+      'Assalam o Alaikum, I would like a visa assessment.',
+      `Name: ${data.get('name')}`,
+      `Phone: ${data.get('phone')}`,
+      `Destination: ${data.get('destination')}`,
+    ];
+    const msg = String(data.get('message') || '').trim();
+    if (msg) lines.push(`Details: ${msg}`);
+    const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(url, '_blank', 'noopener');
+  });
+</script>
+
+<style>
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(243, 245, 242, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 72px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--green);
+  }
+  nav {
+    display: flex;
+    gap: 1.6rem;
+    margin-left: auto;
+  }
+  nav a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.97rem;
+    color: var(--muted);
+  }
+  nav a:hover {
+    color: var(--green);
+  }
+  .header-cta {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.93rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding: clamp(48px, 8vw, 104px) 0 clamp(56px, 8vw, 112px);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+  .hero-place {
+    font-weight: 600;
+    color: var(--stamp-red);
+    margin-bottom: 1.1rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    color: var(--green);
+    max-width: 12ch;
+  }
+  .hero-lede {
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 48ch;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2.2rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: clamp(64px, 9vw, 120px) 0;
+  }
+  .section-green {
+    background: var(--green);
+    color: var(--paper);
+  }
+  .section-tint {
+    background: #e7ede8;
+  }
+  .section-head {
+    max-width: 640px;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+  .section-head h2,
+  .docs-grid h2,
+  .contact-info h2 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    color: var(--green);
+  }
+  .section-green .section-head h2 {
+    color: var(--paper);
+  }
+  .section-head p {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .section-green .section-head p {
+    color: var(--sage);
+  }
+
+  /* Destinations */
+  .dest-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--green);
+  }
+  .dest-list li {
+    padding: 1.8rem 1.6rem 2rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .dest-list li:not(:nth-child(3n + 1)) {
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--line);
+  }
+  .dest-list h3 {
+    font-size: 1.5rem;
+    color: var(--green);
+  }
+  .dest-visa {
+    display: inline-block;
+    margin-top: 0.7rem;
+    padding: 0.2rem 0.65rem;
+    border: 1.5px solid var(--stamp-blue);
+    border-radius: 4px;
+    color: var(--stamp-blue);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transform: rotate(-1.5deg);
+  }
+  .dest-list p {
+    margin-top: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    counter-reset: none;
+  }
+  .steps li {
+    position: relative;
+    padding-top: 1.6rem;
+    border-top: 1px solid rgba(201, 214, 204, 0.35);
+  }
+  .step-num {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    margin-bottom: 1.2rem;
+  }
+  .steps h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.6rem;
+  }
+  .steps p {
+    color: var(--sage);
+    font-size: 1rem;
+  }
+
+  /* Documents + why */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(40px, 7vw, 96px);
+    align-items: start;
+  }
+  .docs-intro {
+    margin-top: 1rem;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+  .checklist {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+  }
+  .checklist li {
+    position: relative;
+    padding: 0.85rem 0 0.85rem 2.2rem;
+    border-bottom: 1px dashed var(--line);
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.05rem;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--green);
+    border-radius: 4px;
+    background:
+      linear-gradient(45deg, transparent 45%, var(--green) 45% 58%, transparent 58%) 2px 5px / 7px 7px no-repeat,
+      linear-gradient(-45deg, transparent 42%, var(--green) 42% 56%, transparent 56%) 5px 1px / 10px 11px no-repeat;
+  }
+  .why {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: clamp(28px, 4vw, 44px);
+  }
+  .why h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem) !important;
+  }
+  .why dl {
+    margin: 1.8rem 0 0;
+  }
+  .why dl div + div {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .why dt {
+    font-weight: 700;
+    color: var(--green);
+    font-size: 1.08rem;
+  }
+  .why dd {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+  }
+
+  /* FAQ */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+  .faq-list details {
+    border-bottom: 1px solid #cdd8d0;
+  }
+  .faq-list details:first-child {
+    border-top: 1px solid #cdd8d0;
+  }
+  .faq-list summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.25rem 2.5rem 1.25rem 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    color: var(--ink);
+  }
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-list summary::after {
+    content: '+';
+    position: absolute;
+    right: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--green);
+    transition: transform 0.2s ease;
+  }
+  .faq-list details[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .faq-list details p {
+    padding: 0 2.5rem 1.4rem 0;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(40px, 7vw, 96px);
+    align-items: start;
+  }
+  .contact-info > p {
+    margin-top: 1rem;
+    color: var(--muted);
+    max-width: 44ch;
+  }
+  .contact-details {
+    margin: 2rem 0 0;
+  }
+  .contact-details div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .contact-details dt {
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .contact-details dd {
+    margin: 0;
+    font-weight: 600;
+  }
+  .contact-details a {
+    color: var(--green);
+  }
+  .contact-form {
+    display: grid;
+    gap: 1.2rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-top: 6px solid var(--green);
+    border-radius: 18px;
+    padding: clamp(24px, 4vw, 40px);
+  }
+  .contact-form label {
+    display: grid;
+    gap: 0.45rem;
+  }
+  .contact-form label span {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .contact-form em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.8rem 0.9rem;
+    border: 1.5px solid #c8d3cc;
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+  }
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(20, 61, 46, 0.15);
+  }
+  .contact-form button {
+    justify-content: center;
+    margin-top: 0.4rem;
+  }
+  .form-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* Footer */
+  .site-footer {
+    background: var(--green-deep);
+    color: var(--sage);
+    padding: 48px 0;
+    font-size: 0.95rem;
+  }
+  .footer-inner {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .site-footer strong {
+    color: var(--paper);
+    font-weight: 600;
+  }
+  .disclaimer {
+    max-width: 70ch;
+    opacity: 0.8;
+  }
+  .copy {
+    opacity: 0.6;
+    font-size: 0.88rem;
+  }
+
+  /* WhatsApp floating button */
+  .wa-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 30;
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #25d366;
+    color: #fff;
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    nav {
+      display: none;
+    }
+    .header-cta {
+      margin-left: auto;
+    }
+    .hero-grid,
+    .docs-grid,
+    .faq-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .passport {
+      margin: 0 auto;
+      max-width: 340px;
+    }
+    .dest-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .dest-list li:not(:nth-child(3n + 1)) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .dest-list li:nth-child(even) {
+      padding-left: 1.6rem;
+      border-left: 1px solid var(--line);
+    }
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .brand span {
+      font-size: 1.05rem;
+    }
+    .header-cta {
+      display: none;
+    }
+    .dest-list,
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .dest-list li:nth-child(even) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .contact-details div {
+      grid-template-columns: 90px 1fr;
+    }
+  }
+</style>

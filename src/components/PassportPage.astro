@@ -1,0 +1,157 @@
+---
+// Decorative passport visa page with entry stamps. Purely visual.
+const stamps = [
+  { label: 'United Kingdom', sub: 'Visitor', date: '14 MAR', shape: 'rect', color: 'blue', x: 6, y: 8, r: -8 },
+  { label: 'Schengen', sub: 'Type C', date: '02 JUN', shape: 'circle', color: 'red', x: 54, y: 4, r: 10 },
+  { label: 'Canada', sub: 'TRV', date: '21 AUG', shape: 'oval', color: 'green', x: 10, y: 40, r: 6 },
+  { label: 'U.S.A.', sub: 'B1 / B2', date: '09 OCT', shape: 'rect', color: 'red', x: 52, y: 42, r: -5 },
+  { label: 'Australia', sub: 'Subclass 600', date: '17 DEC', shape: 'circle', color: 'blue', x: 30, y: 62, r: -12 },
+];
+---
+
+<div class="passport" aria-hidden="true">
+  <div class="page">
+    <div class="page-head">
+      <span>Visas</span>
+      <span>07</span>
+    </div>
+    <div class="guilloche"></div>
+    {
+      stamps.map((s, i) => (
+        <div
+          class={`stamp ${s.shape} ${s.color}`}
+          style={`--x:${s.x}%; --y:${s.y}%; --r:${s.r}deg; --i:${i};`}
+        >
+          <span class="s-label">{s.label}</span>
+          <span class="s-sub">{s.sub}</span>
+          <span class="s-date">{s.date}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .passport {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin-left: auto;
+  }
+
+  .page {
+    position: relative;
+    aspect-ratio: 5 / 6.4;
+    background: #fbfcfa;
+    border-radius: 6px 18px 18px 6px;
+    border: 1px solid var(--line);
+    box-shadow:
+      -14px 0 0 -6px var(--green),
+      -14px 0 0 -5px var(--green-deep),
+      0 30px 60px -30px rgba(13, 42, 31, 0.45);
+    overflow: hidden;
+  }
+
+  .page-head {
+    position: absolute;
+    inset: 0 0 auto 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 18px;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    border-bottom: 1px dashed var(--line);
+    z-index: 1;
+  }
+
+  .guilloche {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-radial-gradient(circle at 30% 120%, transparent 0 18px, rgba(20, 61, 46, 0.05) 18px 19px),
+      repeating-radial-gradient(circle at 90% -20%, transparent 0 22px, rgba(46, 79, 158, 0.04) 22px 23px);
+  }
+
+  .stamp {
+    --c: var(--stamp-blue);
+    position: absolute;
+    left: var(--x);
+    top: calc(var(--y) + 9%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--c);
+    border: 3px solid var(--c);
+    transform: rotate(var(--r));
+    opacity: 0.86;
+    mix-blend-mode: multiply;
+    line-height: 1.1;
+    font-family: var(--sans);
+    animation: thunk 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+    animation-delay: calc(0.35s + var(--i) * 0.22s);
+  }
+
+  .stamp::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--c);
+    border-radius: inherit;
+  }
+
+  .red {
+    --c: var(--stamp-red);
+  }
+  .green {
+    --c: var(--green);
+  }
+
+  .rect {
+    width: 40%;
+    padding: 12px 8px;
+    border-radius: 6px;
+  }
+  .circle {
+    width: 32%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+  .oval {
+    width: 38%;
+    aspect-ratio: 1.6;
+    border-radius: 50%;
+  }
+
+  .s-label {
+    font-weight: 700;
+    font-size: clamp(0.7rem, 1.6vw, 0.92rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .s-sub {
+    font-size: clamp(0.62rem, 1.3vw, 0.76rem);
+    font-weight: 500;
+  }
+  .s-date {
+    margin-top: 4px;
+    font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 1px 6px;
+    border-top: 1px solid var(--c);
+  }
+
+  @keyframes thunk {
+    from {
+      opacity: 0;
+      transform: rotate(var(--r)) scale(1.6);
+    }
+    to {
+      opacity: 0.86;
+      transform: rotate(var(--r)) scale(1);
+    }
+  }
+</style>
